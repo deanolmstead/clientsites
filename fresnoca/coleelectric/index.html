@@ -369,16 +369,19 @@ a{text-decoration:none}
     <p class="s-eye">Free Estimate</p>
     <h2 class="s-head" style="margin-bottom:32px">Tell Us About<br>Your Project</h2>
     <form onsubmit="v1Submit(event)">
+      <input type="hidden" name="access_key" value="9c66ac91-e04a-46bf-a9b7-39cef266557b">
+      <input type="hidden" name="subject" value="New Lead from Cole Electric Website (V1)">
+      <input type="hidden" name="from_name" value="Cole Electric Website">
       <div class="form-row">
-        <div class="field"><label>First Name</label><input type="text" placeholder="Mike" required></div>
-        <div class="field"><label>Last Name</label><input type="text" placeholder="Smith"></div>
+        <div class="field"><label>First Name</label><input type="text" name="first_name" placeholder="Mike" required></div>
+        <div class="field"><label>Last Name</label><input type="text" name="last_name" placeholder="Smith"></div>
       </div>
       <div class="form-row">
-        <div class="field"><label>Phone</label><input type="tel" placeholder="(559) 000-0000"></div>
-        <div class="field"><label>Email</label><input type="email" placeholder="you@email.com"></div>
+        <div class="field"><label>Phone</label><input type="tel" name="phone" placeholder="(559) 000-0000"></div>
+        <div class="field"><label>Email</label><input type="email" name="email" placeholder="you@email.com" required></div>
       </div>
-      <div class="field"><label>Service Needed</label><select><option value="">Select a service…</option><option>Residential Electrical</option><option>Commercial Electrical</option><option>Panel Upgrade</option><option>Other</option></select></div>
-      <div class="field"><label>Project Details</label><textarea placeholder="Tell us what you need…"></textarea></div>
+      <div class="field"><label>Service Needed</label><select name="service"><option value="">Select a service…</option><option>Residential Electrical</option><option>Commercial Electrical</option><option>Panel Upgrade</option><option>Other</option></select></div>
+      <div class="field"><label>Project Details</label><textarea name="message" placeholder="Tell us what you need…"></textarea></div>
       <button type="submit" class="form-sub" id="v1-sbtn">Request Free Quote</button>
     </form>
   </div>
@@ -436,7 +439,7 @@ a{text-decoration:none}
   });
   document.querySelectorAll('#v1 .yr').forEach(e=>e.textContent=new Date().getFullYear());
 })();
-function v1Submit(e){e.preventDefault();const b=document.getElementById('v1-sbtn');b.textContent='Sending…';b.disabled=true;setTimeout(()=>{b.textContent='✓ Message Sent!';setTimeout(()=>{b.textContent='Request Free Quote';b.disabled=false;e.target.reset()},3000)},650)}
+async function v1Submit(e){e.preventDefault();const b=document.getElementById('v1-sbtn');b.textContent='Sending…';b.disabled=true;const data=new FormData(e.target);try{const r=await fetch('https://api.web3forms.com/submit',{method:'POST',body:data});const d=await r.json();if(d.success){b.textContent='✓ Message Sent!';setTimeout(()=>{b.textContent='Request Free Quote';b.disabled=false;e.target.reset()},3000)}else{b.textContent='Error — try again';b.disabled=false}}catch{b.textContent='Error — try again';b.disabled=false}}
 </script>
 </div>
 <!-- END V1 -->
@@ -769,13 +772,16 @@ function v1Submit(e){e.preventDefault();const b=document.getElementById('v1-sbtn
       </div>
     </div>
     <form onsubmit="v2Submit(event)">
+      <input type="hidden" name="access_key" value="9c66ac91-e04a-46bf-a9b7-39cef266557b">
+      <input type="hidden" name="subject" value="New Lead from Cole Electric Website (V2)">
+      <input type="hidden" name="from_name" value="Cole Electric Website">
       <div class="form-row">
-        <div class="field"><label>Name</label><input type="text" placeholder="Your name" required></div>
-        <div class="field"><label>Phone</label><input type="tel" placeholder="(559) 000-0000"></div>
+        <div class="field"><label>Name</label><input type="text" name="name" placeholder="Your name" required></div>
+        <div class="field"><label>Phone</label><input type="tel" name="phone" placeholder="(559) 000-0000"></div>
       </div>
-      <div class="field"><label>Email</label><input type="email" placeholder="you@email.com"></div>
-      <div class="field"><label>Service Type</label><select><option value="">Select…</option><option>Residential</option><option>Commercial</option><option>Panel Upgrade</option><option>Other</option></select></div>
-      <div class="field"><label>Project Details</label><textarea placeholder="Describe your project…"></textarea></div>
+      <div class="field"><label>Email</label><input type="email" name="email" placeholder="you@email.com" required></div>
+      <div class="field"><label>Service Type</label><select name="service"><option value="">Select…</option><option>Residential</option><option>Commercial</option><option>Panel Upgrade</option><option>Other</option></select></div>
+      <div class="field"><label>Project Details</label><textarea name="message" placeholder="Describe your project…"></textarea></div>
       <button type="submit" class="form-sub" id="v2-sbtn">Send My Request</button>
     </form>
   </div>
@@ -830,7 +836,7 @@ function v1Submit(e){e.preventDefault();const b=document.getElementById('v1-sbtn
   });
   document.querySelectorAll('#v2 .yr').forEach(e=>e.textContent=new Date().getFullYear());
 })();
-function v2Submit(e){e.preventDefault();const b=document.getElementById('v2-sbtn');b.textContent='Sending…';b.disabled=true;setTimeout(()=>{b.textContent='✓ Request Received!';setTimeout(()=>{b.textContent='Send My Request';b.disabled=false;e.target.reset()},3000)},650)}
+async function v2Submit(e){e.preventDefault();const b=document.getElementById('v2-sbtn');b.textContent='Sending…';b.disabled=true;const data=new FormData(e.target);try{const r=await fetch('https://api.web3forms.com/submit',{method:'POST',body:data});const d=await r.json();if(d.success){b.textContent='✓ Request Received!';setTimeout(()=>{b.textContent='Send My Request';b.disabled=false;e.target.reset()},3000)}else{b.textContent='Error — try again';b.disabled=false}}catch{b.textContent='Error — try again';b.disabled=false}}
 </script>
 </div>
 <!-- END V2 -->
