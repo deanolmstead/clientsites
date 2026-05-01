@@ -176,9 +176,10 @@ a{text-decoration:none}
 
 /* ABOUT band */
 #v1 .about{background:var(--paper)}
-#v1 .stats-band{background:var(--ink);padding:48px 64px;display:grid;grid-template-columns:repeat(4,1fr);gap:32px;text-align:center}
+#v1 .stats-band{background:var(--ink);padding:48px 64px;display:grid;grid-template-columns:repeat(4,1fr);gap:32px;text-align:center;align-items:end}
+#v1 .stats-band>div{display:flex;flex-direction:column;justify-content:flex-end;gap:8px;min-height:80px}
 #v1.dark .stats-band{background:rgba(232,160,32,.08);border-top:1px solid rgba(232,160,32,.15);border-bottom:1px solid rgba(232,160,32,.15)}
-#v1 .stat-num{font-family:'Barlow Condensed',sans-serif;font-size:clamp(1.6rem,2.8vw,2.2rem);font-weight:800;color:var(--accent);letter-spacing:.02em;line-height:1;white-space:nowrap}
+#v1 .stat-num{font-family:'Barlow Condensed',sans-serif;font-size:clamp(2rem,3.2vw,2.6rem);font-weight:800;color:var(--accent);letter-spacing:.02em;line-height:1;white-space:nowrap}
 #v1 .stat-lbl{font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-top:8px}
 #v1.dark .stat-lbl{color:var(--muted)}
 #v1 .about-story{padding:80px 64px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
@@ -364,7 +365,7 @@ a{text-decoration:none}
 <section class="about" id="v1-about">
   <div class="stats-band">
     <div>
-      <div class="stat-num" data-target="18" data-suffix="★">0★</div>
+      <div class="stat-num" data-target="18" data-suffix="★">0<span style="font-size:.7em;margin-left:.05em">★</span></div>
       <div class="stat-lbl">Google Reviews</div>
     </div>
     <div>
@@ -504,7 +505,7 @@ a{text-decoration:none}
     new IntersectionObserver(([e])=>{
       if(!e.isIntersecting)return;
       const tgt=parseFloat(el.dataset.target),suf=el.dataset.suffix||'',t0=performance.now();
-      (function tick(now){const p=Math.min((now-t0)/1400,1),ease=1-Math.pow(1-p,3);el.textContent=Math.round(ease*tgt)+suf;if(p<1)requestAnimationFrame(tick)})(t0);
+      (function tick(now){const p=Math.min((now-t0)/1400,1),ease=1-Math.pow(1-p,3);const num=tgt%1?(ease*tgt).toFixed(1):Math.round(ease*tgt);el.innerHTML=num+'<span style="font-size:.7em;margin-left:.05em">'+suf+'</span>';if(p<1)requestAnimationFrame(tick)})(t0);
     },{threshold:.4}).observe(el);
   });
   document.querySelectorAll('#v1 .yr').forEach(e=>e.textContent=new Date().getFullYear());
@@ -782,7 +783,7 @@ async function v1Submit(e){e.preventDefault();const b=document.getElementById('v
     <p>Cole Electric, LLC is a licensed and insured electrical contractor based in Fresno, CA. Owner Mike Cole built this company on a simple belief: do the job right the first time, communicate clearly, and treat every client's property with respect.</p>
     <p>Our team — including Marcus and Reagan — brings that same standard to every call. You'll get the same five-star experience whether you need a single outlet or a full commercial fit-out.</p>
     <div class="about-stats">
-      <div><div class="astat-num" data-v2t="18" data-v2s="★">0★</div><div class="astat-lbl">Google Reviews</div></div>
+      <div><div class="astat-num" data-v2t="18" data-v2s="★">0<span style="font-size:.7em;margin-left:.05em">★</span></div><div class="astat-lbl">Google Reviews</div></div>
       <div><div class="astat-num">5.0</div><div class="astat-lbl">Average Rating</div></div>
       <div><div class="astat-num" style="font-size:clamp(1.6rem,2.8vw,2.2rem)">Licensed</div><div class="astat-lbl">&amp; Insured</div></div>
       <div><div class="astat-num" style="font-size:clamp(1.6rem,2.8vw,2.2rem)">Local</div><div class="astat-lbl">Fresno Owned</div></div>
@@ -901,7 +902,7 @@ async function v1Submit(e){e.preventDefault();const b=document.getElementById('v
     new IntersectionObserver(([e])=>{
       if(!e.isIntersecting)return;
       const tgt=parseFloat(el.dataset.v2t),suf=el.dataset.v2s||'',t0=performance.now();
-      (function tick(now){const p=Math.min((now-t0)/1400,1),ease=1-Math.pow(1-p,3);el.textContent=Math.round(ease*tgt)+suf;if(p<1)requestAnimationFrame(tick)})(t0);
+      (function tick(now){const p=Math.min((now-t0)/1400,1),ease=1-Math.pow(1-p,3);const num=tgt%1?(ease*tgt).toFixed(1):Math.round(ease*tgt);el.innerHTML=num+'<span style="font-size:.7em;margin-left:.05em">'+suf+'</span>';if(p<1)requestAnimationFrame(tick)})(t0);
     },{threshold:.4}).observe(el);
   });
   document.querySelectorAll('#v2 .yr').forEach(e=>e.textContent=new Date().getFullYear());
